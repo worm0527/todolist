@@ -10,3 +10,9 @@ app:
     name: zhang
     age: 18
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

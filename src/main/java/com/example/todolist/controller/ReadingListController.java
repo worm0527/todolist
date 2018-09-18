@@ -1,14 +1,13 @@
 package com.example.todolist.controller;
 
+import com.example.todolist.config.ConfiguationTest;
+import com.example.todolist.config.YmlConfig;
 import com.example.todolist.dao.ReadingListRepo;
 import com.example.todolist.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +17,12 @@ public class ReadingListController {
 
     @Autowired
     private ReadingListRepo readingListRepo;
+
+    @Autowired
+    private ConfiguationTest.Inner inner;
+
+    @Autowired
+    private YmlConfig ymlConfig;
 
     @GetMapping(value = "/{reader}")
     public String readersBooks(@PathVariable String reader, Model model) {
@@ -34,6 +39,15 @@ public class ReadingListController {
         book.setReader(reader);
         readingListRepo.save(book);
         return "redirect:/{reader}";
+    }
+
+    @ResponseBody
+    @RequestMapping("/test")
+    public String test() {
+        System.out.println(ymlConfig.getMenus().get(0).getName());
+        System.out.println(ymlConfig.getMenus().get(1).getName());
+        System.out.println(ymlConfig.getPerson().getAge());
+        return inner.toString();
     }
 
 }

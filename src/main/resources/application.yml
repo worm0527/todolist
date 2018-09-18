@@ -1,2 +1,12 @@
-
+app:
+  menus:
+    - title: title1
+      name: name1
+      path: path1
+    - title: title2
+      name: name2
+      path: path2
+  person:
+    name: zhang
+    age: 18
 
